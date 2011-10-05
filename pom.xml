@@ -54,12 +54,12 @@
 		<repository>
 			<id>local</id>
 			<name>Local Repository</name>
-			<url>file://C:/astah-plugin-SDK-1.0b/repository</url>
+			<url>file://${java.io.tmpdir}/astah-plugin-SDK-1.0b/repository</url>
 		</repository>
 		<snapshotRepository>
 			<id>local-snapshot</id>
 			<name>Local Snapshot Repository</name>
-			<url>file://C:/astah-plugin-SDK-1.0b/repository</url>
+			<url>file://${java.io.tmpdir}/astah-plugin-SDK-1.0b/repository</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
