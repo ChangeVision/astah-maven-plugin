@@ -62,7 +62,12 @@ public class LaunchMojo
      */
     private String pluginJar;
     
-
+    /**
+     * Arguments of launching Astah 
+     * @parameter expression="${astah.argLine}"
+     */
+    private String argLine;
+    
     public void execute() throws MojoExecutionException {
     	AstahEdition edition;
 		try {
@@ -82,6 +87,9 @@ public class LaunchMojo
         String pluginList = pluginsBuilder.toString().trim();
     	Set<String> jvmProp = new HashSet<String>();
     	jvmProp.add("-Dplugin_list="+pluginList);
+    	if(argLine != null && argLine.isEmpty() == false){
+    		jvmProp.add(argLine);
+    	}
     	LaunchAstah launch = new LaunchAstah(installDirectory, edition, jvmProp,getLog());
     	launch.execute();
         

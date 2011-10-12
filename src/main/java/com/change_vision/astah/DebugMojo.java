@@ -69,6 +69,12 @@ public class DebugMojo
      */
     private int port = 44000;
     
+    /**
+     * Arguments of launching Astah 
+     * @parameter expression="${astah.argLine}"
+     */
+    private String argLine;
+    
 
     public void execute()
         throws MojoExecutionException
@@ -95,6 +101,7 @@ public class DebugMojo
     	jvmProp.add("-Djava.compiler=NONE");
     	jvmProp.add("-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=" + port);
     	jvmProp.add("-Dplugin_list="+pluginList);
+    	jvmProp.add(argLine);
 
     	LaunchAstah launch = new LaunchAstah(installDirectory,edition, jvmProp,getLog());
     	launch.execute();
