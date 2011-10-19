@@ -101,7 +101,9 @@ public class DebugMojo
     	jvmProp.add("-Djava.compiler=NONE");
     	jvmProp.add("-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=" + port);
     	jvmProp.add("-Dplugin_list="+pluginList);
-    	jvmProp.add(argLine);
+    	if(argLine != null && argLine.isEmpty() == false){
+    		jvmProp.add(argLine);
+    	}
 
     	LaunchAstah launch = new LaunchAstah(installDirectory,edition, jvmProp,getLog());
     	launch.execute();
