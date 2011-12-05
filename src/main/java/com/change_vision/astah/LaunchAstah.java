@@ -36,10 +36,10 @@ public class LaunchAstah {
 					"Please check astah* install folder.");
 		}
 		CommandBuilder commandBuilder = new CommandBuilder(jvmProp, edition);
-		log.info(new ASDK().getHome());
+		log.debug(new ASDK().getHome());
 		List<String> commands = commandBuilder.build();
 		for (String command : commands) {
-			log.info(command);
+			log.debug(command);
 		}
 		ProcessBuilder builder = new ProcessBuilder(commands);
 		builder.directory(installDirectory);
