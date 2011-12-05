@@ -85,4 +85,9 @@
 			<url>file://${java.io.tmpdir}/astah-plugin-SDK/repository</url>
 		</snapshotRepository>
 	</distributionManagement>
+	<scm>
+		<url>svn+ssh://dev.change-vision.com/home/svnreps/jude/trunk/maven/astah-maven-plugin</url>
+		<developerConnection>scm:svn:svn+ssh://dev.change-vision.com/home/svnreps/jude/trunk/maven/astah-maven-plugin</developerConnection>
+		<tag>svn+ssh://dev.change-vision.com/home/svnreps/jude/tags/maven/astah-maven-plugin</tag>
+	</scm>
 </project>
