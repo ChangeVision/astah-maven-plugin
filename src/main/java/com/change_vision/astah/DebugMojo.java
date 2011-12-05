@@ -17,9 +17,7 @@ package com.change_vision.astah;
  */
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -86,21 +84,15 @@ public class DebugMojo
 			String message = String.format("%s is not supported.", this.edition);
 			throw new MojoExecutionException(message);
 		}
-		List<File> plugins = new ArrayList<File>();
-		plugins.add(new File(outputDirectory.getAbsolutePath(),pluginJar + ".jar"));
-		
-        StringBuilder pluginsBuilder = new StringBuilder();
-        for (File plugin : plugins) {
-			pluginsBuilder.append(plugin.toURI().toASCIIString());
-        	pluginsBuilder.append(" ");
-		}
-        String pluginList = pluginsBuilder.toString().trim();
+		File targetPlugin = getTarget();
+		PluginPathsBuilder pathBuilder = new PluginPathsBuilder(targetPlugin);
+
     	Set<String> jvmProp = new LinkedHashSet<String>();
     	jvmProp.add("-Xdebug");
     	jvmProp.add("-Xnoagent");
     	jvmProp.add("-Djava.compiler=NONE");
     	jvmProp.add("-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=" + port);
-    	jvmProp.add("-Dplugin_list="+pluginList);
+    	jvmProp.add(pathBuilder.build());
     	if(argLine != null && argLine.isEmpty() == false){
     		jvmProp.add(argLine);
     	}
@@ -109,4 +101,8 @@ public class DebugMojo
     	launch.execute();
 
     }
+    
+	protected File getTarget() {
+		return new File(outputDirectory.getAbsolutePath(), pluginJar + ".jar");
+	}
 }

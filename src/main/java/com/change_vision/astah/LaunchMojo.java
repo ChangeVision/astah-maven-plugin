@@ -17,9 +17,7 @@ package com.change_vision.astah;
  */
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -27,71 +25,75 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 /**
  * Goal which launch astah with developing plugins.
- *
+ * 
  * @goal launch
  * @requiresProject false
  */
-public class LaunchMojo
-    extends AbstractMojo
-{
-    /**
-     * Location of astah* install directory.
-     * @parameter expression="${astahPath}"
-     * @required
-     */
-    private File installDirectory;
+public class LaunchMojo extends AbstractMojo {
 
-    /**
-     * Edition of astah*.
-     * @parameter expression="${astahEdition}"
-     * @required
-     */
-    private String edition;
+	/**
+	 * Location of astah* install directory.
+	 * 
+	 * @parameter expression="${astahPath}"
+	 * @required
+	 */
+	private File installDirectory;
 
-    /**
-     * Location of build output directory.
-     * @parameter expression="${project.build.directory}"
-     * @required
-     */
-    private File outputDirectory;
+	/**
+	 * Edition of astah*.
+	 * 
+	 * @parameter expression="${astahEdition}"
+	 * @required
+	 */
+	private String edition;
 
-    /**
-     * Location of astah* plugin file name.
-     * @parameter expression="${project.build.finalName}"
-     * @required
-     */
-    private String pluginJar;
-    
-    /**
-     * Arguments of launching Astah 
-     * @parameter expression="${astah.argLine}"
-     */
-    private String argLine;
-    
-    public void execute() throws MojoExecutionException {
-    	AstahEdition edition;
+	/**
+	 * Location of build output directory.
+	 * 
+	 * @parameter expression="${project.build.directory}"
+	 * @required
+	 */
+	private File outputDirectory;
+
+	/**
+	 * Location of astah* plugin file name.
+	 * 
+	 * @parameter expression="${project.build.finalName}"
+	 * @required
+	 */
+	private String pluginJar;
+
+	/**
+	 * Arguments of launching Astah
+	 * 
+	 * @parameter expression="${astah.argLine}"
+	 */
+	private String argLine;
+
+	public void execute() throws MojoExecutionException {
+		AstahEdition edition;
 		try {
 			edition = AstahEdition.valueOf(this.edition);
 		} catch (IllegalArgumentException e) {
-			String message = String.format("%s is not supported.", this.edition);
+			String message = String
+					.format("%s is not supported.", this.edition);
 			throw new MojoExecutionException(message);
 		}
-		List<File> plugins = new ArrayList<File>();
-		plugins.add(new File(outputDirectory.getAbsolutePath(),pluginJar + ".jar"));
-		
-        StringBuilder pluginsBuilder = new StringBuilder();
-        for (File plugin : plugins) {
-			pluginsBuilder.append(plugin.toURI().toASCIIString());
-        	pluginsBuilder.append(" ");
+		File targetPlugin = getTarget();
+		PluginPathsBuilder pathBuilder = new PluginPathsBuilder(targetPlugin);
+		Set<String> jvmProp = new HashSet<String>();
+		jvmProp.add(pathBuilder.build());
+		if (argLine != null && argLine.isEmpty() == false) {
+			jvmProp.add(argLine);
 		}
-        String pluginList = pluginsBuilder.toString().trim();
-    	Set<String> jvmProp = new HashSet<String>();
-    	jvmProp.add("-Dplugin_list="+pluginList);
-    	if(argLine != null && argLine.isEmpty() == false){
-    		jvmProp.add(argLine);
-    	}
-    	LaunchAstah launch = new LaunchAstah(installDirectory, edition, jvmProp,getLog());
-    	launch.execute();
-        
-    }
+		LaunchAstah launch = new LaunchAstah(installDirectory, edition,
+				jvmProp, getLog());
+		launch.execute();
+
+	}
+
+	protected File getTarget() {
+		return new File(outputDirectory.getAbsolutePath(), pluginJar + ".jar");
+	}
+
 }
