@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
 public class CommandBuilder {
@@ -32,7 +33,7 @@ public class CommandBuilder {
 			InputStream resourceAsStream = getDevPropertiesResource();
 			FileOutputStream outputStream = new FileOutputStream(devProp);
 			IOUtils.copy(resourceAsStream, outputStream);
-			devProp.deleteOnExit();
+//			devProp.deleteOnExit();
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		} catch (NullPointerException e) {
@@ -43,8 +44,9 @@ public class CommandBuilder {
 		for (String prop : jvmProp) {
 			commands.add(prop);
 		}
-		commands.add("-Dplugin.switch.file=file://"
-				+ devProp.getAbsolutePath());
+		String path = devProp.getAbsolutePath();
+		path = FilenameUtils.separatorsToUnix(path);
+		commands.add("-Dplugin.switch.file=file:///"	+ path);
 		commands.add("-jar");
 		commands.add(edition.getJARName());
 		commands.add("-clean");

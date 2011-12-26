@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
+
 public class PluginPathsBuilder {
 	
 	private ASDK sdk = new ASDK();
@@ -28,8 +30,10 @@ public class PluginPathsBuilder {
 
 		StringBuilder pluginsBuilder = new StringBuilder();
 		for (File plugin : plugins) {
-			pluginsBuilder.append("file://");
-			pluginsBuilder.append(plugin.getAbsolutePath());
+			pluginsBuilder.append("file:///");
+			String path = plugin.getAbsolutePath();
+			path = FilenameUtils.separatorsToUnix(path);
+			pluginsBuilder.append(path);
 			pluginsBuilder.append(" ");
 		}
 		String pluginList = pluginsBuilder.toString().trim();
