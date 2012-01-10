@@ -39,6 +39,8 @@
         </repository>
         <snapshotRepository>
           <id>dev.change-vision.com-snapshot-deploy</id>
+          <name>dev.change-vision.com-deploy SNAPSHOT Maven Repository</name>
+          <url>scp://dev.change-vision.com/opt/repository/maven2-snapshot</url>
         </snapshotRepository>
       </distributionManagement>
     </profile>
