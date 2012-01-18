@@ -10,6 +10,7 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 import java.io.File;
 import java.util.HashMap;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -23,22 +24,21 @@ public class PluginPathsBuilderTest {
 	public void targetがnullの時にIAEが投げられること() {
 		new PluginPathsBuilder(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void targetがファイルの時にIAEが投げられること() throws Exception {
-		new PluginPathsBuilder(folder.getRoot());
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void targetがプラグインファイルでない時IAEが投げられること() throws Exception {
-		new PluginPathsBuilder(folder.newFile("README.txt"));		
-	}
-	
+		
 	@Test
 	public void bundleにプラグインがない場合でもパスを作成できること() throws Exception {
 		PluginPathsBuilder builder = new PluginPathsBuilder(folder.newFile("plugin.jar"));
 		String path = builder.build();
 		assertThat(path,is(startsWith("-Dplugin_list")));
+	}
+	
+	@Test
+	public void targetがディレクトリの時はreferenceを使用すること() throws Exception {
+		PluginPathsBuilder builder = new PluginPathsBuilder(folder.newFolder("target","classes"));
+		String path = builder.build();
+		assertThat(path,is(startsWith("-Dplugin_list")));
+		assertThat(path,is(containsString("reference:")));
+		assertThat(path,is(endsWith("/")));
 	}
 	
 	@Test
@@ -52,7 +52,7 @@ public class PluginPathsBuilderTest {
 		ASDK sdk = new ASDK(env);
 		PluginPathsBuilder builder = new PluginPathsBuilder(sdk,folder.newFile("plugin.jar"));
 		String path = builder.build();
-		assertThat(path,is(endsWith("bundle.jar")));
+		assertThat(path,is(containsString("bundle.jar")));
 	}
 	
 	@Test

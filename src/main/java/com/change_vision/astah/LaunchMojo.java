@@ -50,18 +50,10 @@ public class LaunchMojo extends AbstractMojo {
 	/**
 	 * Location of build output directory.
 	 * 
-	 * @parameter expression="${project.build.directory}"
+	 * @parameter expression="${project.build.outputDirectory}"
 	 * @required
 	 */
 	private File outputDirectory;
-
-	/**
-	 * Location of astah* plugin file name.
-	 * 
-	 * @parameter expression="${project.build.finalName}"
-	 * @required
-	 */
-	private String pluginJar;
 
 	/**
 	 * Arguments of launching Astah
@@ -93,7 +85,7 @@ public class LaunchMojo extends AbstractMojo {
 	}
 
 	protected File getTarget() {
-		return new File(outputDirectory.getAbsolutePath(), pluginJar + ".jar");
+		return outputDirectory;
 	}
 
 }

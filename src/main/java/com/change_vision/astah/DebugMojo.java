@@ -49,17 +49,10 @@ public class DebugMojo
     
     /**
      * Location of build output directory.
-     * @parameter expression="${project.build.directory}"
+     * @parameter expression="${project.build.outputDirectory}"
      * @required
      */
     private File outputDirectory;
-
-    /**
-     * Location of astah* plugin file name.
-     * @parameter expression="${project.build.finalName}"
-     * @required
-     */
-    private String pluginJar;
     
     /**
      * Debug Port.
@@ -103,6 +96,6 @@ public class DebugMojo
     }
     
 	protected File getTarget() {
-		return new File(outputDirectory.getAbsolutePath(), pluginJar + ".jar");
+		return outputDirectory;
 	}
 }
