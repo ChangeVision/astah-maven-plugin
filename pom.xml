@@ -6,63 +6,22 @@
   <name>Astah plug-in builder</name>
   <version>0.9.3</version>
   <url>http://astah.net/</url>
-  <profiles>
-    <profile>
-      <id>pro-team</id>
-      <repositories>
-        <repository>
-          <id>dev.change-vision.com-snapshot-deploy</id>
-          <name>Pro Maven Snapshot Repository</name>
-          <url>scp://dev.change-vision.com/opt/repository/maven2-snapshot</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-        </repository>
-        <repository>
-          <id>dev.change-vision.com-deploy</id>
-          <name>Pro Maven Repository</name>
-          <url>scp://dev.change-vision.com/opt/repository/maven2</url>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-      <distributionManagement>
-        <site>
-          <id>dev.change-vision.com-deploy</id>
-          <url>scp://dev.change-vision.com/opt/maven-site/pro/${buildLabel}</url>
-        </site>
-        <repository>
-          <id>dev.change-vision.com-deploy</id>
-          <name>dev.change-vision.com-deploy Maven Repository</name>
-          <url>scp://dev.change-vision.com/opt/repository/maven2</url>
-        </repository>
-        <snapshotRepository>
-          <id>dev.change-vision.com-snapshot-deploy</id>
-          <name>dev.change-vision.com-deploy SNAPSHOT Maven Repository</name>
-          <url>scp://dev.change-vision.com/opt/repository/maven2-snapshot</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>release</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <distributionManagement>
-        <repository>
-          <id>local</id>
-          <name>Local Repository</name>
-          <url>file://${java.io.tmpdir}/astah-plugin-SDK/repository</url>
-        </repository>
-        <snapshotRepository>
-          <id>local-snapshot</id>
-          <name>Local Snapshot Repository</name>
-          <url>file://${java.io.tmpdir}/astah-plugin-SDK/repository</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
-  </profiles>
+  <distributionManagement>
+    <repository>
+      <id>local</id>
+      <name>Local Repository</name>
+      <url>file://${java.io.tmpdir}/astah-plugin-SDK/repository</url>
+    </repository>
+    <snapshotRepository>
+      <id>local-snapshot</id>
+      <name>Local Snapshot Repository</name>
+      <url>file://${java.io.tmpdir}/astah-plugin-SDK/repository</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <scm>
+    <url>svn+ssh://dev.change-vision.com/home/svnreps/jude/trunk/maven/astah-maven-plugin</url>
+    <developerConnection>scm:svn:svn+ssh://dev.change-vision.com/home/svnreps/jude/trunk/maven/astah-maven-plugin</developerConnection>
+  </scm>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/test/java</testSourceDirectory>
@@ -103,9 +62,6 @@
       </extension>
     </extensions>
   </build>
-  <pluginRepositories>
-
-  </pluginRepositories>
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -137,20 +93,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <distributionManagement>
-    <repository>
-      <id>local</id>
-      <name>Local Repository</name>
-      <url>file://${java.io.tmpdir}/astah-plugin-SDK/repository</url>
-    </repository>
-    <snapshotRepository>
-      <id>local-snapshot</id>
-      <name>Local Snapshot Repository</name>
-      <url>file://${java.io.tmpdir}/astah-plugin-SDK/repository</url>
-    </snapshotRepository>
-  </distributionManagement>
-  <scm>
-    <url>svn+ssh://dev.change-vision.com/home/svnreps/jude/trunk/maven/astah-maven-plugin</url>
-    <developerConnection>scm:svn:svn+ssh://dev.change-vision.com/home/svnreps/jude/trunk/maven/astah-maven-plugin</developerConnection>
-  </scm>
 </project>
