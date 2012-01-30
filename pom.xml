@@ -7,15 +7,19 @@
   <version>0.9.3</version>
   <url>http://astah.net/</url>
   <distributionManagement>
+    <site>
+      <id>dev.change-vision.com-deploy</id>
+      <url>scp://dev.change-vision.com/opt/maven-site/astah-maven-plugin/${buildLabel}</url>
+    </site>
     <repository>
-      <id>local</id>
-      <name>Local Repository</name>
-      <url>file://${java.io.tmpdir}/astah-plugin-SDK/repository</url>
+      <id>dev.change-vision.com-deploy</id>
+      <name>dev.change-vision.com-deploy Maven Repository</name>
+      <url>scp://dev.change-vision.com/opt/repository/maven2</url>
     </repository>
     <snapshotRepository>
-      <id>local-snapshot</id>
-      <name>Local Snapshot Repository</name>
-      <url>file://${java.io.tmpdir}/astah-plugin-SDK/repository</url>
+      <id>dev.change-vision.com-snapshot-deploy</id>
+      <name>dev.change-vision.com-deploy SNAPSHOT Maven Repository</name>
+      <url>scp://dev.change-vision.com/opt/repository/maven2-snapshot</url>
     </snapshotRepository>
   </distributionManagement>
   <scm>
@@ -65,8 +69,9 @@
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
-      <artifactId>maven-plugin-api</artifactId>
-      <version>2.0</version>
+      <artifactId>maven-core</artifactId>
+      <version>3.0.3</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
@@ -85,6 +90,7 @@
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-all</artifactId>
       <version>1.1</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
