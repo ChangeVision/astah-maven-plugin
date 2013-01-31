@@ -11,6 +11,16 @@
       <id>github</id>
       <url>gitsite:git@github.com/ChangeVision/astah-maven-plugin.git</url>
     </site>
+    <repository>
+      <id>dev.change-vision.com-deploy</id>
+      <name>dev.change-vision.com-deploy Maven Repository</name>
+      <url>scpexe://dev.change-vision.com/opt/repository/maven2</url>
+    </repository>
+    <snapshotRepository>
+      <id>dev.change-vision.com-snapshot-deploy</id>
+      <name>dev.change-vision.com-deploy SNAPSHOT Maven Repository</name>
+      <url>scpexe://dev.change-vision.com/opt/repository/maven2-snapshot</url>
+    </snapshotRepository>
   </distributionManagement>
   <scm>
     <url>http://github.com/ChangeVision/astah-maven-plugin/tree/master</url>
@@ -79,6 +89,13 @@
         </dependencies>
       </plugin>
     </plugins>
+    <extensions>
+      <extension>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-ssh-external</artifactId>
+            <version>2.2</version>
+      </extension>
+    </extensions>
   </build>
   <dependencies>
     <dependency>
