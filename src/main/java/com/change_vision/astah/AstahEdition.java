@@ -1,7 +1,7 @@
 package com.change_vision.astah;
 
 public enum AstahEdition {
-	professional,community,uml,sysml;
+	professional,community,uml,sysml,gsn;
 	
 	public String getJARName(){
 		switch(this){
@@ -13,6 +13,8 @@ public enum AstahEdition {
 			return "astah-uml.jar";
 		case community : 
 			return "astah-community.jar";
+        case gsn :
+            return "astah-gsn.jar"; 
 		default:
 			return null;
 		}
