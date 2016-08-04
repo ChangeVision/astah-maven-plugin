@@ -9,7 +9,7 @@ public class ASDK {
 	
 	private Map<String,String> env = System.getenv();
     static final String DEV_BUNDLES_DIR = "bundles";
-	static final String ENVIRONMENT_VALUE_OF_ASDK_HOME = "ASDK_HOME";
+	static final String ENVIRONMENT_VALUE_OF_ASDK_HOME = "SSDK_HOME";
 
 	public ASDK(){}
 	

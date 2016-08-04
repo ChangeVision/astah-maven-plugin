@@ -34,14 +34,14 @@ public class DebugMojo
 {
     /**
      * Location of astah* install directory.
-     * @parameter expression="${astahPath}"
+     * @parameter expression="${safiliaPath}"
      * @required
      */
     private File installDirectory;
     
     /**
      * Edition of astah*.
-     * @parameter expression="${astahEdition}"
+     * @parameter expression="${safiliaEdition}"
      * @required
      */
     private String edition;
@@ -56,13 +56,13 @@ public class DebugMojo
     
     /**
      * Debug Port.
-     * @parameter expression="${astah.debug.port}"
+     * @parameter expression="${safilia.debug.port}"
      */
     private int port = 44000;
     
     /**
      * Arguments of launching Astah 
-     * @parameter expression="${astah.argLine}"
+     * @parameter expression="${safilia.argLine}"
      */
     private String argLine;
     

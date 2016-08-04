@@ -34,7 +34,7 @@ public class LaunchMojo extends AbstractMojo {
 	/**
 	 * Location of astah* install directory.
 	 * 
-	 * @parameter expression="${astahPath}"
+	 * @parameter expression="${safiliaPath}"
 	 * @required
 	 */
 	private File installDirectory;
@@ -42,7 +42,7 @@ public class LaunchMojo extends AbstractMojo {
 	/**
 	 * Edition of astah*.
 	 * 
-	 * @parameter expression="${astahEdition}"
+	 * @parameter expression="${safiliaEdition}"
 	 * @required
 	 */
 	private String edition;
@@ -58,7 +58,7 @@ public class LaunchMojo extends AbstractMojo {
 	/**
 	 * Arguments of launching Astah
 	 * 
-	 * @parameter expression="${astah.argLine}"
+	 * @parameter expression="${safilia.argLine}"
 	 */
 	private String argLine;
 
