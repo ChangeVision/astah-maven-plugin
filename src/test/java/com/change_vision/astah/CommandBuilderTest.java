@@ -26,7 +26,7 @@ public class CommandBuilderTest {
 	
 	@Test(expected=IllegalStateException.class)
 	public void もしプロパティファイルが取得できなかった場合はISEが投げられること() throws Exception {
-		CommandBuilder builder = new CommandBuilder(new HashSet<String>(), AstahEdition.professional){
+		CommandBuilder builder = new CommandBuilder(new HashSet<String>(), AstahEdition.safilia){
 			@Override
 			protected InputStream getDevPropertiesResource() {
 				return null;
@@ -37,7 +37,7 @@ public class CommandBuilderTest {
 	
 	@Test(expected=IllegalStateException.class)
 	public void もしプロパティファイル取得中にIOExceptionが発生した場合はISEが投げられること() throws Exception {
-		CommandBuilder builder = new CommandBuilder(new HashSet<String>(), AstahEdition.professional){
+		CommandBuilder builder = new CommandBuilder(new HashSet<String>(), AstahEdition.safilia){
 			@Override
 			protected InputStream getDevPropertiesResource() {
 				InputStream stream = mock(InputStream.class);
@@ -54,12 +54,12 @@ public class CommandBuilderTest {
 	
 	@Test
 	public void jvmPropに特に指定がなくても出力されること() throws Exception {
-		CommandBuilder builder = new CommandBuilder(null, AstahEdition.professional);
+		CommandBuilder builder = new CommandBuilder(null, AstahEdition.safilia);
 		List<String> commands = builder.build();
 		assertThat(commands.get(0),is("java"));
 		assertThat(commands.get(1),is(startsWith("-Dplugin.switch.file")));
 		assertThat(commands.get(2),is("-jar"));
-		assertThat(commands.get(3),is("astah-pro.jar"));
+		assertThat(commands.get(3),is("safilia.jar"));
 		assertThat(commands.get(4),is("-clean"));
 	}
 
@@ -67,13 +67,13 @@ public class CommandBuilderTest {
 	public void jvmPropに指定がある場合追加されて出力されること() throws Exception {
 		HashSet<String> jvmProp = new HashSet<String>();
 		jvmProp.add("-Djava.language=en");
-		CommandBuilder builder = new CommandBuilder(jvmProp, AstahEdition.professional);
+		CommandBuilder builder = new CommandBuilder(jvmProp, AstahEdition.safilia);
 		List<String> commands = builder.build();
 		assertThat(commands.get(0),is("java"));
 		assertThat(commands.get(1),is("-Djava.language=en"));
 		assertThat(commands.get(2),is(startsWith("-Dplugin.switch.file")));
 		assertThat(commands.get(3),is("-jar"));
-		assertThat(commands.get(4),is("astah-pro.jar"));
+		assertThat(commands.get(4),is("safilia.jar"));
 		assertThat(commands.get(5),is("-clean"));
 	}
 	
