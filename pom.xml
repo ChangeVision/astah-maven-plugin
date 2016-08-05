@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.change_vision.astah</groupId>
-  <artifactId>astah-maven-plugin</artifactId>
+  <groupId>com.change_vision</groupId>
+  <artifactId>safilia-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <name>Astah Plug-in Builder</name>
-  <version>1.0.2</version>
+  <name>Safilia Plug-in Builder</name>
+  <version>1.0.0</version>
   <url>http://astah.net/</url>
   <distributionManagement>
     <site>
