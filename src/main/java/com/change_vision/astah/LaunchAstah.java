@@ -27,13 +27,13 @@ public class LaunchAstah {
 
 		if (!installDirectory.exists()) {
 			throw new MojoExecutionException(
-					"Please check astah install folder.");
+					"Please check Safilia install folder.");
 		}
 
 		File jar = new File(installDirectory, edition.getJARName());
 		if (!jar.exists()) {
 			throw new MojoExecutionException(
-					"Please check astah* install folder.");
+					"Please check Safilia install folder.");
 		}
 		CommandBuilder commandBuilder = new CommandBuilder(jvmProp, edition);
 		log.debug(new ASDK().getHome());
@@ -44,10 +44,10 @@ public class LaunchAstah {
 		ProcessBuilder builder = new ProcessBuilder(commands);
 		builder.directory(installDirectory);
 		try {
-			log.info("Launching astah*...");
+			log.info("Launching Safilia...");
 			builder.start();
 		} catch (IOException e) {
-			throw new MojoExecutionException("Can't run astah.", e);
+			throw new MojoExecutionException("Can't run Safilia.", e);
 		}
 		try {
 			Thread.sleep(10000);
