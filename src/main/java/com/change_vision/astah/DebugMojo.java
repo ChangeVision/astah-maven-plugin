@@ -85,6 +85,7 @@ public class DebugMojo
     	jvmProp.add("-Xnoagent");
     	jvmProp.add("-Djava.compiler=NONE");
     	jvmProp.add("-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=" + port);
+        jvmProp.add("-Djava.library.path=" + installDirectory + "/lib/rlm");
     	jvmProp.add(pathBuilder.build());
     	if(argLine != null && argLine.isEmpty() == false){
     		jvmProp.add(argLine);
