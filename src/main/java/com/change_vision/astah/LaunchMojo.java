@@ -75,6 +75,7 @@ public class LaunchMojo extends AbstractMojo {
 		PluginPathsBuilder pathBuilder = new PluginPathsBuilder(targetPlugin);
 		Set<String> jvmProp = new HashSet<String>();
 		jvmProp.add(pathBuilder.build());
+        jvmProp.add("-Djava.library.path=" + installDirectory + "/lib/rlm");
 		if (argLine != null && argLine.isEmpty() == false) {
 			jvmProp.add(argLine);
 		}
