@@ -4,7 +4,7 @@
   <artifactId>astah-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <name>Astah Plug-in Builder</name>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <url>http://astah.net/</url>
   <distributionManagement>
     <site>
